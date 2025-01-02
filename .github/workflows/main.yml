@@ -1,0 +1,51 @@
+name: React TypeScript CI/CD
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Check out the code from the repository
+    - name: Check out repository
+      uses: actions/checkout@v2
+
+    # Step 2: Set up Node.js (use LTS version)
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'  # You can change this based on your Node.js version
+
+    # Step 3: Install dependencies
+    - name: Install dependencies
+      run: npm install
+
+    # Step 4: Run TypeScript Type Checking
+    - name: Run TypeScript type-checking
+      run: npx tsc --noEmit  # Check TypeScript types without compiling
+
+    # Step 5: Run tests (optional but recommended for CI)
+    - name: Run tests
+      run: npm test -- --coverage
+
+    # Step 6: Build the React app
+    - name: Build the React app
+      run: npm run build
+
+    # Step 7: Deploy to a hosting platform (optional)
+    # For example, if deploying to Netlify, Firebase, or similar:
+    - name: Deploy to production (optional)
+      run: |
+        echo "Deploying to production..."
+        # You can add deployment steps here, for example, using Netlify CLI, AWS CLI, etc.
+        # Example for Netlify:
+        # npm install -g netlify-cli
+        # netlify deploy --prod
+      if: github.ref == 'refs/heads/main'
