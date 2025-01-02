@@ -1,6 +1,6 @@
 // adding some comment
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
+import React from 'react';
 import { ThemeProvider } from "@mui/material";
 import { theme } from "./shared/utils/theme";
 
@@ -10,15 +10,9 @@ import SignInPage from "./pages/Sign-in.page";
 
 function App() {
   return (
-    <ThemeProvider theme = {theme}>
-      <Router>
-        <Routes>
-          <Route path='/' element={<HomePage />}/>
-          <Route path='/register' element={<RegisterPage />}/>
-          <Route path='/sign-in' element={<SignInPage />}/>
-        </Routes>
-      </Router>
-    </ThemeProvider>
+    <div>
+      <h1>Learn React</h1>
+    </div>
   );
 }
 
